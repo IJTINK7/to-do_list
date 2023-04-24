@@ -15,8 +15,14 @@ function App() {
 	]
 	return (
 		<div className='App'>
-			<Todolist title = "What to learn"/>
-			<Todolist title = "James Cameron's movies"/>
+			<Todolist
+				title = "What to learn"
+				tasks={tasks1}
+			/>
+			<Todolist
+				title = "James Cameron's movies"
+				tasks ={tasks2}
+			/>
 		</div>
 	)
 }
