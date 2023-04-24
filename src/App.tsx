@@ -10,9 +10,9 @@ const App = () => {
 				<button>+</button>
 			</div>
 			<ul>
-				<li>HTML&CSS</li>
-				<li>JS</li>
-				<li>React</li>
+				<li> <input type="checkbox" checked={true}/>HTML&CSS</li>
+				<li> <input type="checkbox" checked={true}/>JS</li>
+				<li> <input type="checkbox" checked={false}/>React</li>
 			</ul>
 			<div>
 				<button>All</button>
