@@ -13,7 +13,7 @@ type TodolistsType ={
 function App() {
 	let [todolists, setTodolists] = useState<Array<TodolistsType>>([
 		{id: v1(), title: "What to learn", filter: "all"},
-		{id: v1(), title: "What to buy", filter: "active"},
+		{id: v1(), title: "What to buy", filter: "all"},
 	])
 
 	let [tasks, setTasks] = useState([
@@ -23,8 +23,6 @@ function App() {
 		{id: v1(), title: "Rest API", isDone: false},
 		{id: v1(), title: "GraphQL", isDone: false},
 	]);
-	let [filter, setFilter] = useState<FilterValuesType>("all");
-
 
 	function removeTask(id: string) {
 		let filteredTasks = tasks.filter(t => t.id !== id);
@@ -42,35 +40,34 @@ function App() {
 		if (task) {
 			task.isDone = isDone;
 		}
-
 		setTasks([...tasks]);
 	}
 
-
-	let tasksForTodolist = tasks;
-
-	if (filter === "active") {
-		tasksForTodolist = tasks.filter(t => !t.isDone);
-	}
-	if (filter === "completed") {
-		tasksForTodolist = tasks.filter(t => t.isDone);
-	}
-
-	function changeFilter(value: FilterValuesType) {
-		setFilter(value);
+	function changeFilter(todolistID: string, value: FilterValuesType) {
+		setTodolists(todolists.map(el => el.id === todolistID ? {...el, filter: value}: el));
 	}
 
 
 	return (
 		<div className="App">
 			{todolists.map(el=>{
-				return <Todolist title={el.title}
-								 tasks={tasksForTodolist}
-								 removeTask={removeTask}
-								 changeFilter={changeFilter}
-								 addTask={addTask}
-								 changeTaskStatus={changeStatus}
-								 filter={el.filter}
+				let tasksForTodolist = tasks;
+				if (el.filter === "active") {
+					tasksForTodolist = tasks.filter(t => !t.isDone);
+				}
+				if (el.filter === "completed") {
+					tasksForTodolist = tasks.filter(t => t.isDone);
+				}
+				return <Todolist
+					key={el.id}
+					todolistID={el.id}
+					title={el.title}
+					tasks={tasksForTodolist}
+					removeTask={removeTask}
+					changeFilter={changeFilter}
+					addTask={addTask}
+					changeTaskStatus={changeStatus}
+					filter={el.filter}
 				/>
 			})}
 
