@@ -10,20 +10,11 @@ function App() {
 		{ id: 4, title: "Rest API", isDone: false },
 		{ id: 5, title: "GraphQL", isDone: false },
 	]
-	const tasks2 = [
-		{ id: 1, title: "Titanic", isDone: true },
-		{ id: 2, title: "Terminator 2", isDone: true },
-		{ id: 3, title: "Jaws", isDone: false },
-	]
 	return (
 		<div className='App'>
 			<Todolist
 				title = "What to learn"
 				tasks={tasks1}
-			/>
-			<Todolist
-				title = "James Cameron's movies"
-				tasks ={tasks2}
 			/>
 		</div>
 	)
