@@ -1,5 +1,6 @@
-import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
+import React, {ChangeEvent} from 'react';
 import {FilterValuesType} from './App';
+import {AddItemForm} from "./components/AddItemForm";
 
 export type TaskType = {
 	id: string
@@ -49,11 +50,15 @@ export function Todolist(props: PropsType) {
 	const onAllClickHandler = () => props.changeFilter("all", props.id);
 	const onActiveClickHandler = () => props.changeFilter("active", props.id);
 	const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
+	const addItemHandler =(newTitle:string)=>{
+		props.addTask(newTitle, props.id)
+	}
 
 	return <div>
 		<h3> {props.title}
 			<button onClick={removeTodolist}>x</button>
 		</h3>
+		<AddItemForm callBack={addItemHandler}/>
 		{/*<div>*/}
 		{/*	<input value={title}*/}
 		{/*		   onChange={onChangeHandler}*/}
