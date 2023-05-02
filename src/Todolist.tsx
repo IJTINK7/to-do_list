@@ -19,6 +19,7 @@ type PropsType = {
 	changeTaskStatus: (id: string, isDone: boolean, todolistId: string) => void
 	removeTodolist: (id: string) => void
 	filter: FilterValuesType
+	changeTaskTitle: (todolistId: string, taskID: string, newTitle: string) => void
 }
 
 export function Todolist(props: PropsType) {
@@ -77,11 +78,14 @@ export function Todolist(props: PropsType) {
 						let newIsDoneValue = e.currentTarget.checked;
 						props.changeTaskStatus(t.id, newIsDoneValue, props.id);
 					}
+					const changeTaskHandler = (newTitle: string) => {
+						props.changeTaskTitle(props.id, t.id, newTitle)
+					}
 
 					return <li key={t.id} className={t.isDone ? "is-done" : ""}>
 						<input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
 						{/*<span>{t.title}</span>*/}
-						<EditableSpan oldTitle={t.title}/>
+						<EditableSpan oldTitle={t.title} callBack={changeTaskHandler}/>
 						<button onClick={onClickHandler}>x</button>
 					</li>
 				})
