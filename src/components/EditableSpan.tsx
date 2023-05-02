@@ -4,9 +4,12 @@ type PropsType={
 }
 export const EditableSpan = (props: PropsType) => {
 	const [edit, setEdit] = useState(false)
+	const editHandler = () => {
+		setEdit(!edit)
+	}
 	return (
 		edit
-		? <input value={props.oldTitle}/>
-		: <span>{props.oldTitle}</span>
+		? <input value={props.oldTitle} onBlur={editHandler} autoFocus/>
+		: <span onDoubleClick={editHandler}>{props.oldTitle}</span>
 	);
 };
