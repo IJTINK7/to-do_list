@@ -35,7 +35,7 @@ export function Todolist(props: PropsType) {
 			{props.title}
 			<button onClick={removeTodolistHandler}>X</button>
 		</h3>
-		<AddItemForm newItem={props.title} callBack={addNewItemHandler}/>
+		<AddItemForm callBack={addNewItemHandler}/>
 		<ul>
 			{
 				props.tasks.map(t => {
