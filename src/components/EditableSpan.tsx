@@ -1,10 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-export const EditableSpan = () => {
+type PropsType = {
+	title: string
+}
+
+export const EditableSpan = (props: PropsType) => {
+	const [edit, setEdit] = useState(false)
+	const editTitle = () => {
+		setEdit(!edit)
+	}
 	return (
-		<div>Hi</div>
+		edit
+		?	<input value={props.title} onBlur={editTitle} autoFocus/>
+		:	<span onDoubleClick={editTitle}>{props.title}</span>
 	);
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Todolist 06
