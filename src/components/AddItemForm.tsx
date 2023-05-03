@@ -1,12 +1,16 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
-export const AddItemForm = () => {
+type PropsType = {
+	newItem: string;
+	callBack: (newItem: string)=>void;
+}
+export const AddItemForm = (props:PropsType) => {
 	let [title, setTitle] = useState("")
 	let [error, setError] = useState<string | null>(null)
 
 	const addTask = () => {
 		if (title.trim() !== "") {
-			props.addTask(props.todolistID, title.trim());
+			props.callBack(title.trim());
 			setTitle("");
 		} else {
 			setError("Title is required");
