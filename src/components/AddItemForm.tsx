@@ -35,7 +35,7 @@ export const AddItemForm = (props:PropsType) => {
 				   onKeyPress={onKeyPressHandler}
 				   className={error ? "error" : ""}
 			/>
-			<Button onClick={addTask}>+</Button>
+			<Button onClick={addTask} variant={"contained"} color={"primary"}>+</Button>
 			{error && <div className="error-message">{error}</div>}
 		</div>
 	);
