@@ -3,6 +3,7 @@ import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from "./components/AddItemForm";
+import {Container} from "@mui/material";
 
 export type FilterValuesType = "all" | "active" | "completed";
 
@@ -18,7 +19,6 @@ type TasksType={
 function App() {
 	let todolistID1 = v1()
 	let todolistID2 = v1()
-
 	let [todolists, setTodolists] = useState<Array<TodolistsType>>([
 		{id: todolistID1, title: "What to learn", filter: "all"},
 		{id: todolistID2, title: "What to buy", filter: "all"},
@@ -71,31 +71,32 @@ function App() {
 	}
 	return (
 		<div className="App">
-			<AddItemForm callBack={addNewTodolist}/>
-			{todolists.map(el=>{
-				let tasksForTodolist = tasks[el.id];
-				if (el.filter === "active") {
-					tasksForTodolist = tasks[el.id].filter(t => !t.isDone);
-				}
-				if (el.filter === "completed") {
-					tasksForTodolist = tasks[el.id].filter(t => t.isDone);
-				}
-				return <Todolist
-					key={el.id}
-					todolistID={el.id}
-					title={el.title}
-					tasks={tasksForTodolist}
-					removeTask={removeTask}
-					changeFilter={changeFilter}
-					addTask={addTask}
-					changeTaskStatus={changeStatus}
-					filter={el.filter}
-					removeTodolist={removeTodolist}
-					changeTaskTitle={changeTaskTitle}
-					changeTodolistTitle={changeTodolistTitle}
-				/>
-			})}
-
+			<Container fixed>
+				<AddItemForm callBack={addNewTodolist}/>
+				{todolists.map(el=>{
+					let tasksForTodolist = tasks[el.id];
+					if (el.filter === "active") {
+						tasksForTodolist = tasks[el.id].filter(t => !t.isDone);
+					}
+					if (el.filter === "completed") {
+						tasksForTodolist = tasks[el.id].filter(t => t.isDone);
+					}
+					return <Todolist
+						key={el.id}
+						todolistID={el.id}
+						title={el.title}
+						tasks={tasksForTodolist}
+						removeTask={removeTask}
+						changeFilter={changeFilter}
+						addTask={addTask}
+						changeTaskStatus={changeStatus}
+						filter={el.filter}
+						removeTodolist={removeTodolist}
+						changeTaskTitle={changeTaskTitle}
+						changeTodolistTitle={changeTodolistTitle}
+					/>
+				})}
+			</Container>
 		</div>
 	);
 }
