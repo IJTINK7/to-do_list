@@ -3,7 +3,7 @@ import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from "./components/AddItemForm";
-import {AppBar, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 
 export type FilterValuesType = "all" | "active" | "completed";
@@ -88,7 +88,7 @@ function App() {
 					<AddItemForm callBack={addNewTodolist}/>
 				</Grid>
 				<Grid container spacing={3}>
-					{todolists.map(el=>{
+					{todolists.map(el => {
 						let tasksForTodolist = tasks[el.id];
 						if (el.filter === "active") {
 							tasksForTodolist = tasks[el.id].filter(t => !t.isDone);
@@ -97,20 +97,22 @@ function App() {
 							tasksForTodolist = tasks[el.id].filter(t => t.isDone);
 						}
 						return <Grid item>
-							<Todolist
-								key={el.id}
-								todolistID={el.id}
-								title={el.title}
-								tasks={tasksForTodolist}
-								removeTask={removeTask}
-								changeFilter={changeFilter}
-								addTask={addTask}
-								changeTaskStatus={changeStatus}
-								filter={el.filter}
-								removeTodolist={removeTodolist}
-								changeTaskTitle={changeTaskTitle}
-								changeTodolistTitle={changeTodolistTitle}
-							/>
+							<Paper>
+								<Todolist
+									key={el.id}
+									todolistID={el.id}
+									title={el.title}
+									tasks={tasksForTodolist}
+									removeTask={removeTask}
+									changeFilter={changeFilter}
+									addTask={addTask}
+									changeTaskStatus={changeStatus}
+									filter={el.filter}
+									removeTodolist={removeTodolist}
+									changeTaskTitle={changeTaskTitle}
+									changeTodolistTitle={changeTodolistTitle}
+								/>
+							</Paper>
 						</Grid>
 
 					})}
