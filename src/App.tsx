@@ -87,7 +87,7 @@ function App() {
 				<Grid container>
 					<AddItemForm callBack={addNewTodolist}/>
 				</Grid>
-				<Grid container spacing={3}>
+				<Grid container spacing={3} style={{padding: "20px"}}>
 					{todolists.map(el => {
 						let tasksForTodolist = tasks[el.id];
 						if (el.filter === "active") {
@@ -97,7 +97,7 @@ function App() {
 							tasksForTodolist = tasks[el.id].filter(t => t.isDone);
 						}
 						return <Grid item>
-							<Paper>
+							<Paper style={{padding: "20px"}}>
 								<Todolist
 									key={el.id}
 									todolistID={el.id}
