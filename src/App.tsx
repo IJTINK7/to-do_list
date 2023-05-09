@@ -87,7 +87,7 @@ function App() {
 				<Grid container>
 					<AddItemForm callBack={addNewTodolist}/>
 				</Grid>
-				<Grid container>
+				<Grid container spacing={3}>
 					{todolists.map(el=>{
 						let tasksForTodolist = tasks[el.id];
 						if (el.filter === "active") {
@@ -96,20 +96,23 @@ function App() {
 						if (el.filter === "completed") {
 							tasksForTodolist = tasks[el.id].filter(t => t.isDone);
 						}
-						return <Todolist
-							key={el.id}
-							todolistID={el.id}
-							title={el.title}
-							tasks={tasksForTodolist}
-							removeTask={removeTask}
-							changeFilter={changeFilter}
-							addTask={addTask}
-							changeTaskStatus={changeStatus}
-							filter={el.filter}
-							removeTodolist={removeTodolist}
-							changeTaskTitle={changeTaskTitle}
-							changeTodolistTitle={changeTodolistTitle}
-						/>
+						return <Grid item>
+							<Todolist
+								key={el.id}
+								todolistID={el.id}
+								title={el.title}
+								tasks={tasksForTodolist}
+								removeTask={removeTask}
+								changeFilter={changeFilter}
+								addTask={addTask}
+								changeTaskStatus={changeStatus}
+								filter={el.filter}
+								removeTodolist={removeTodolist}
+								changeTaskTitle={changeTaskTitle}
+								changeTodolistTitle={changeTodolistTitle}
+							/>
+						</Grid>
+
 					})}
 				</Grid>
 
