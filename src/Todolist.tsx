@@ -10,7 +10,6 @@ export type TaskType = {
 	title: string
 	isDone: boolean
 }
-
 type PropsType = {
 	todolistID: string
 	title: string

@@ -8,12 +8,12 @@ import {Menu} from "@mui/icons-material";
 
 export type FilterValuesType = "all" | "active" | "completed";
 
-type TodolistsType ={
+type TodolistsType = {
 	id: string;
 	title: string;
 	filter: FilterValuesType;
 }
-type TasksType={
+type TasksType = {
 	[key: string]: Array<TaskType>
 }
 
@@ -41,34 +41,42 @@ function App() {
 			{id: v1(), title: 'Sugar', isDone: false},
 		]
 	})
+
 	function removeTask(todolistID: string, taskID: string) {
 		setTasks({...tasks, [todolistID]: tasks[todolistID].filter(el => el.id !== taskID)});
 	}
+
 	function addTask(todolistID: string, taskTitle: string) {
 		let newTask = {id: v1(), title: taskTitle, isDone: false}
-		setTasks({...tasks, [todolistID]: [ newTask, ...tasks[todolistID]]});
+		setTasks({...tasks, [todolistID]: [newTask, ...tasks[todolistID]]});
 	}
+
 	function changeStatus(todolistID: string, taskId: string, isDone: boolean) {
-		setTasks({...tasks, [todolistID]: tasks[todolistID].map(el => el.id === taskId ?  {...el, isDone}: el)})
+		setTasks({...tasks, [todolistID]: tasks[todolistID].map(el => el.id === taskId ? {...el, isDone} : el)})
 	}
+
 	function changeFilter(todolistID: string, value: FilterValuesType) {
-		setTodolists(todolists.map(el => el.id === todolistID ? {...el, filter: value}: el));
+		setTodolists(todolists.map(el => el.id === todolistID ? {...el, filter: value} : el));
 	}
+
 	const removeTodolist = (todolistID: string) => {
 		setTodolists(todolists.filter(el => el.id !== todolistID))
 		delete tasks[todolistID]
 	}
-	const addNewTodolist = (newItem: string) =>{
+	const addNewTodolist = (newItem: string) => {
 		const newTodolistID = v1();
-		const newTodolist:TodolistsType  = {id: newTodolistID, title: newItem, filter: "all"}
+		const newTodolist: TodolistsType = {id: newTodolistID, title: newItem, filter: "all"}
 		setTodolists([newTodolist, ...todolists])
 		setTasks({...tasks, [newTodolistID]: []})
 	}
 	const changeTaskTitle = (todolistID: string, taskId: string, newTitle: string) => {
-		setTasks({...tasks, [todolistID]: tasks[todolistID].map(el=> el.id === taskId ? {...el, title: newTitle}: el )})
+		setTasks({
+			...tasks,
+			[todolistID]: tasks[todolistID].map(el => el.id === taskId ? {...el, title: newTitle} : el)
+		})
 	}
 	const changeTodolistTitle = (todolistID: string, newTitle: string) => {
-		setTodolists(todolists.map(el => el.id === todolistID ? {...el, title: newTitle}: el))
+		setTodolists(todolists.map(el => el.id === todolistID ? {...el, title: newTitle} : el))
 	}
 	return (
 		<div className="App">
@@ -114,18 +122,14 @@ function App() {
 								/>
 							</Paper>
 						</Grid>
-
 					})}
 				</Grid>
-
 			</Container>
 		</div>
 	);
 }
 
-
 export default App;
-
 
 
 // Todolist 01
@@ -189,13 +193,13 @@ export default App;
 // 		{id: todolistID2, title: "What to buy", filter: "all"},
 // 	])
 
-	// let [tasks, setTasks] = useState([
-	// 	{id: v1(), title: "HTML&CSS", isDone: true},
-	// 	{id: v1(), title: "JS", isDone: true},
-	// 	{id: v1(), title: "ReactJS", isDone: false},
-	// 	{id: v1(), title: "Rest API", isDone: false},
-	// 	{id: v1(), title: "GraphQL", isDone: false},
-	// ]);
+// let [tasks, setTasks] = useState([
+// 	{id: v1(), title: "HTML&CSS", isDone: true},
+// 	{id: v1(), title: "JS", isDone: true},
+// 	{id: v1(), title: "ReactJS", isDone: false},
+// 	{id: v1(), title: "Rest API", isDone: false},
+// 	{id: v1(), title: "GraphQL", isDone: false},
+// ]);
 
 // 	let [tasks, setTasks] = useState<TasksType>({
 // 		[todolistID1]: [
