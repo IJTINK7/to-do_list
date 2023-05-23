@@ -7,7 +7,6 @@ import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography}
 import {Menu} from "@mui/icons-material";
 
 export type FilterValuesType = "all" | "active" | "completed";
-
 type TodolistsType = {
 	id: string;
 	title: string;
@@ -16,7 +15,6 @@ type TodolistsType = {
 type TasksType = {
 	[key: string]: Array<TaskType>
 }
-
 function App() {
 	let todolistID1 = v1()
 	let todolistID2 = v1()
@@ -41,7 +39,6 @@ function App() {
 			{id: v1(), title: 'Sugar', isDone: false},
 		]
 	})
-
 	function removeTask(todolistID: string, taskID: string) {
 		setTasks({...tasks, [todolistID]: tasks[todolistID].filter(el => el.id !== taskID)});
 	}
@@ -128,9 +125,7 @@ function App() {
 		</div>
 	);
 }
-
 export default App;
-
 
 // Todolist 01
 

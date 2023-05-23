@@ -23,7 +23,6 @@ type PropsType = {
 	changeTaskTitle: (todolistID: string, taskId: string, newTitle: string) => void
 	changeTodolistTitle: (todolistID: string, newTitle: string) => void
 }
-
 export function Todolist(props: PropsType) {
 	const onAllClickHandler = () => props.changeFilter(props.todolistID, "all");
 	const onActiveClickHandler = () => props.changeFilter(props.todolistID, "active");
@@ -75,8 +74,6 @@ export function Todolist(props: PropsType) {
 		</div>
 	</div>
 }
-
-
 // Todolist 01
 
 //import React from "react";
