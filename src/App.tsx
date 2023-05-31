@@ -1,8 +1,9 @@
-import React, {useReducer, useState} from 'react';
+import React, {useReducer} from 'react';
 import './App.css';
 import {Todolist} from './Todolist';
 import { v1 } from 'uuid';
 import {addTaskAC, removeTaskAC, tasksReducer} from "./reducers/tasksReducer";
+import {changeFilterAC, filterReducer} from "./reducers/filterReducer";
 
 export type FilterValuesType = "all" | "active" | "completed";
 
@@ -32,19 +33,20 @@ function App() {
 		dispatchTasks(addTaskAC(title))
 	}
 
-	let [filter, setFilter] = useState<FilterValuesType>("all");
+	// let [filter, setFilter] = useState<FilterValuesType>("all");
+	let [filter, dispatchFilter] = useReducer(filterReducer, "all");
 
 	let tasksForTodolist = tasks;
 
 	if (filter === "active") {
-		tasksForTodolist = tasks.filter(t => t.isDone);
+		tasksForTodolist = tasks.filter(t => !t.isDone);
 	}
 	if (filter === "completed") {
 		tasksForTodolist = tasks.filter(t => t.isDone);
 	}
 
 	function changeFilter(value: FilterValuesType) {
-		setFilter(value);
+		dispatchFilter(changeFilterAC(value));
 	}
 
 	return (
@@ -176,10 +178,10 @@ export default App;
 // 	let tasksForTodolist = tasks;
 //
 // 	if (filter === "active") {
-// 		tasksForTodolist = tasks.filter(t => t.isDone === false);
+// 		tasksForTodolist = tasks.filter(t => !t.isDone);
 // 	}
 // 	if (filter === "completed") {
-// 		tasksForTodolist = tasks.filter(t => t.isDone === true);
+// 		tasksForTodolist = tasks.filter(t => t.isDone);
 // 	}
 //
 // 	function changeFilter(value: FilterValuesType) {
@@ -245,10 +247,10 @@ export default App;
 //     let tasksForTodolist = tasks;
 //
 //     if (filter === "active") {
-//         tasksForTodolist = tasks.filter(t => t.isDone === false);
+//         tasksForTodolist = tasks.filter(t => !t.isDone);
 //     }
 //     if (filter === "completed") {
-//         tasksForTodolist = tasks.filter(t => t.isDone === true);
+//         tasksForTodolist = tasks.filter(t => t.isDone);
 //     }
 //
 //     function changeFilter(value: FilterValuesType) {
