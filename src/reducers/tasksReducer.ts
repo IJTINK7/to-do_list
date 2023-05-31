@@ -1,11 +1,13 @@
 import {TaskType} from "../Todolist";
+import {v1} from "uuid";
 export const tasksReducer = (state: TaskType[], action:GeneralType) => {
 	switch (action.type) {
 		case "REMOVE-TASK":{
 			return state.filter(el => el.id !== action.payload.id)
 		}
 		case "ADD-TASK":{
-			return state
+			let newTask = { id: v1(), title: action.payload.title, isDone: false };
+			return [newTask, ...state];
 		}
 		default:
 			return state
@@ -26,8 +28,11 @@ export const removeTaskAC = (id: string) => {
 }
 type AddTaskACType = ReturnType<typeof addTaskAC>
 
-export const addTaskAC = () => {
+export const addTaskAC = (title: string) => {
 	return {
-		type: "ADD-TASK"
+		type: "ADD-TASK",
+		payload:{
+			title
+		}
 	} as const
 }
