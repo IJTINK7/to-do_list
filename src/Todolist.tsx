@@ -4,7 +4,8 @@ import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
 import IconButton from '@mui/material/IconButton/IconButton';
 import {Delete} from "@mui/icons-material";
-import {Button, Checkbox} from "@mui/material";
+import {Button} from "@mui/material";
+import {UnCheckbox} from "./UnCheckbox";
 
 
 export type TaskType = {
@@ -42,9 +43,10 @@ export function Todolist(props: PropsType) {
     const onAllClickHandler = () => props.changeFilter("all", props.id);
     const onActiveClickHandler = () => props.changeFilter("active", props.id);
     const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
-    const onChangeGlobalHandler = (e: ChangeEvent<HTMLInputElement>, id: string) => {
-        let newIsDoneValue = e.currentTarget.checked;
-        props.changeTaskStatus(id, newIsDoneValue, props.id);
+
+
+    const onChangeGlobalHandler = (id: string, e:ChangeEvent<HTMLInputElement> ) => {
+        props.changeTaskStatus(id, e.currentTarget.checked, props.id);
     }
 
     return <div>
@@ -58,18 +60,12 @@ export function Todolist(props: PropsType) {
             {
                 props.tasks.map(t => {
                     const onClickHandler = () => props.removeTask(t.id, props.id)
-                    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {onChangeGlobalHandler(e, t.id)}
                     const onTitleChangeHandler = (newValue: string) => {
                         props.changeTaskTitle(t.id, newValue, props.id);
                     }
 
                     return <div key={t.id} className={t.isDone ? "is-done" : ""}>
-                        <Checkbox
-                            checked={t.isDone}
-                            color="primary"
-                            onChange={onChangeHandler}
-                        />
-
+                        <UnCheckbox checked={t.isDone} callBack={(e)=>onChangeGlobalHandler(t.id, e)}/>
                         <EditableSpan value={t.title} onChange={onTitleChangeHandler} />
                         <IconButton onClick={onClickHandler}>
                             <Delete />
