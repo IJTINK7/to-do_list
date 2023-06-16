@@ -3,8 +3,8 @@ import {v1} from "uuid";
 
 export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksStateType => {
 	switch (action.type) {
-		case "ADD-NEW-TASK":
-			return {[action.payload.newTodolistId]: [], ...state}
+		case "ADD-NEW-TODOLIST":
+			return {[action.payload.newTodolistId]: []}
 		case "ADD-TASK": {
 			const newTask = {id: v1(), title: action.payload.title, isDone: false}
 			return {...state, [action.payload.todolistID]: [newTask, ...state[action.payload.todolistID]]}
@@ -44,7 +44,7 @@ type ChangeTaskTitleAC = ReturnType<typeof changeTaskTitleAC>
 
 export const addNewTasksAC = (newTodolistId: string) => {
 	return {
-		type: "ADD-NEW-TASK",
+		type: "ADD-NEW-TODOLIST",
 		payload: {newTodolistId}
 	} as const
 }
