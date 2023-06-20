@@ -63,7 +63,7 @@ function App() {
 	}
 
 	function changeStatus(id: string, isDone: boolean, todolistId: string) {
-		dispatchTasks(changeTaskStatusAC(id,isDone,todolistId))
+		dispatchTasks(changeTaskStatusAC(id, isDone, todolistId))
 	}
 
 	function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
