@@ -7,7 +7,7 @@ import AppBar from '@mui/material/AppBar/AppBar';
 import {Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {todolistsReducer} from "./state/todolists-reducer";
-import {removeTaskAC, tasksReducer} from "./state/tasks-reducer";
+import {addTaskAC, removeTaskAC, tasksReducer} from "./state/tasks-reducer";
 
 
 export type FilterValuesType = "all" | "active" | "completed";
@@ -49,13 +49,8 @@ function AppWithReducers() {
 	}
 
 	function addTask(title: string, todolistId: string) {
-		let task = {id: v1(), title: title, isDone: false};
-		//достанем нужный массив по todolistId:
-		let todolistTasks = tasks[todolistId];
-		// перезапишем в этом объекте массив для нужного тудулиста копией, добавив в начало новую таску:
-		tasks[todolistId] = [task, ...todolistTasks];
-		// засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
-		setTasks({...tasks});
+		const action = addTaskAC(title, todolistId);
+		dispatchToTasksReducer(action)
 	}
 
 	function changeStatus(id: string, isDone: boolean, todolistId: string) {
