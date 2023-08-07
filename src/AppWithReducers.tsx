@@ -7,6 +7,7 @@ import AppBar from '@mui/material/AppBar/AppBar';
 import {Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {
+	AddTodolistAC,
 	ChangeTodolistFilterAC,
 	ChangeTodolistTitleAC,
 	RemoveTodolistAC,
@@ -84,13 +85,9 @@ function AppWithReducers() {
 	}
 
 	function addTodolist(title: string) {
-		let newTodolistId = v1();
-		let newTodolist: TodolistType = {id: newTodolistId, title: title, filter: 'all'};
-		setTodolists([newTodolist, ...todolists]);
-		setTasks({
-			...tasks,
-			[newTodolistId]: []
-		})
+		const action = AddTodolistAC(title)
+		dispatchToTodolistsReducer(action)
+		dispatchToTasksReducer(action)
 	}
 
 	return (
