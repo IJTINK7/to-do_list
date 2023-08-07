@@ -6,7 +6,7 @@ import {AddItemForm} from './AddItemForm';
 import AppBar from '@mui/material/AppBar/AppBar';
 import {Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
-import {todolistsReducer} from "./state/todolists-reducer";
+import {ChangeTodolistFilterAC, todolistsReducer} from "./state/todolists-reducer";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./state/tasks-reducer";
 
 
@@ -64,11 +64,8 @@ function AppWithReducers() {
 	}
 
 	function changeFilter(value: FilterValuesType, todolistId: string) {
-		let todolist = todolists.find(tl => tl.id === todolistId);
-		if (todolist) {
-			todolist.filter = value;
-			setTodolists([...todolists])
-		}
+		const action = ChangeTodolistFilterAC(todolistId,value)
+		dispatchToTodolistsReducer(action)
 	}
 
 	function removeTodolist(id: string) {
