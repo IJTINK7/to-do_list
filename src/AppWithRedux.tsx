@@ -32,8 +32,8 @@ function AppWithRedux() {
 
 	const dispatch = useDispatch()
 
-	const todolists = useSelector<AppRootStoreType,TodolistType[]>(store=>store.todolists)
-	const tasks = useSelector<AppRootStoreType,TasksStateType>(store=>store.tasks)
+	const todolists = useSelector<AppRootStoreType, TodolistType[]>(store => store.todolists)
+	const tasks = useSelector<AppRootStoreType, TasksStateType>(store => store.tasks)
 
 
 	function removeTask(id: string, todolistId: string) {
@@ -57,7 +57,7 @@ function AppWithRedux() {
 	}
 
 	function changeFilter(value: FilterValuesType, todolistId: string) {
-		const action = ChangeTodolistFilterAC(todolistId,value)
+		const action = ChangeTodolistFilterAC(todolistId, value)
 		dispatch(action)
 	}
 
