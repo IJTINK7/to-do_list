@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
-import {FilterValuesType} from "./App";
+import {FilterValuesType} from "./AppWithReducers";
 
 type PropsType = {
 	todolistId: string
