@@ -17,7 +17,7 @@ export type TaskType = {
 	title: string
 	isDone: boolean
 }
-export const Todolist: React.FC<PropsType> = (props: PropsType) => {
+export const Todolist = React.memo((props: PropsType ) => {
 	let [title, setTitle] = useState("")
 
 	const [error, setError] = useState<string | null>(null)
@@ -77,4 +77,4 @@ export const Todolist: React.FC<PropsType> = (props: PropsType) => {
 			</div>
 		</div>
 	);
-};
+});
