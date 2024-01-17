@@ -1,11 +1,11 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useMemo} from 'react';
 import {FilterValuesType} from './App';
 import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
 import {IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {MyButton} from "./state/MyButton";
-import {Task} from "./state/Task";
+import {TaskWithRedux} from "./state/TaskWithRedux";
 
 
 export type TaskType = {
@@ -45,12 +45,16 @@ export const Todolist = memo((props: PropsType) => {
     const onCompletedClickHandler = useCallback(() => props.changeFilter("completed", props.id),[props]);
 
     let tasks = props.tasks;
-    if (props.filter === "active") {
-        tasks = tasks.filter(t => !t.isDone);
-    }
-    if (props.filter === "completed") {
-        tasks = tasks.filter(t => t.isDone);
-    }
+    tasks = useMemo(()=>{
+        if (props.filter === "active") {
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            tasks = tasks.filter(t => !t.isDone);
+        }
+        if (props.filter === "completed") {
+            tasks = tasks.filter(t => t.isDone);
+        }
+        return tasks
+    }, [props.filter])
 
     return <div>
         <h3> <EditableSpan value={props.title} onChange={changeTodolistTitle} />
@@ -62,7 +66,8 @@ export const Todolist = memo((props: PropsType) => {
         <div>
             {
                 tasks.map(t => {
-                       return <Task key={t.id} task={t} changeTaskTitle={props.changeTaskTitle} id={props.id} changeTaskStatus={props.changeTaskStatus} removeTask={props.removeTask}/>
+                       // return <Task key={t.id} task={t} changeTaskTitle={props.changeTaskTitle} id={props.id} changeTaskStatus={props.changeTaskStatus} removeTask={props.removeTask}/>
+                    return <TaskWithRedux todolistId={props.id} taskId={t.id}/>
                 })
             }
         </div>
