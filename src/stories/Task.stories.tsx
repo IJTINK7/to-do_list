@@ -29,6 +29,7 @@ const meta: Meta <typeof Task> = {
 
   },
     args:{
+      task: {id: "12312355tgh1", title:"JS", isDone: true},
       todolistId: "123eg231243" // Общие данные для всех историй
     }
 } satisfies Meta<typeof Task>;
@@ -36,12 +37,7 @@ const meta: Meta <typeof Task> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const TaskIsDoneStory: Story = {
-    args:{
-        task: {id: "12312355tgh1", title:"JS", isDone: true},
-    }
-
-}
+export const TaskIsDoneStory: Story = {}
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const TaskIsNotDoneStory: Story = {
     args:{
