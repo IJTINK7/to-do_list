@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {taskApi, todolistApi} from "./api/todolists-api";
 
-
 export const Api = () => {
 	return (
 		<div>
@@ -61,7 +60,6 @@ export const DeleteTodolist = () => {
 	return <div>{JSON.stringify(state)}</div>
 }
 
-
 let todolistId = "5cb9cb26-3bcb-49c2-ac5e-8c072965f516"
 
 export const GetTasks = () => {
@@ -70,7 +68,6 @@ export const GetTasks = () => {
 		taskApi.getTasks(todolistId)
 			.then((res)=>{
 				setState(res.data)
-				console.log(res.data)
 			})
 	}, [])
 	return <div>{JSON.stringify(state)}</div>

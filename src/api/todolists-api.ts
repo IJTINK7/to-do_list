@@ -39,6 +39,12 @@ export type TaskType = {
 	todoListId:string
 }
 
+export type A = {
+	error: null
+	totalCount: number
+	items: TaskType[]
+}
+
 export type ResponseTaskDataType = {
 	resultCode: number
 	messages: string[],
@@ -71,7 +77,7 @@ export const todolistApi = {
 
 export const taskApi = {
 	getTasks(todolistId: string) {
-		return instance.get<TaskType[]>(`/todo-lists/${todolistId}/tasks`)
+		return instance.get<A>(`/todo-lists/${todolistId}/tasks`)
 	},
 	createTask(todolistId: string, title: string) {
 		return instance.post<ResponseTaskDataType>(`/todo-lists/${todolistId}/tasks`, {title: title})
